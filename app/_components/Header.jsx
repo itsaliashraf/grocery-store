@@ -1,7 +1,6 @@
-"use client";
 import { LayoutGrid, Search, ShoppingBag } from "lucide-react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import GlobalApi from "../_utils/GlobalApi";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,15 +12,8 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 
-function Header() {
-  const [categoryList, setCategoryList] = useState();
-  useEffect(() => {
-    getCategoryList();
-  }, []);
-  const getCategoryList = async () => {
-    const categories = await GlobalApi.getCategory();
-    setCategoryList(categories.data.data);
-  };
+async function Header() {
+  const categoryList = await GlobalApi.getCategoryList();
 
   return (
     <div className="p-5 shadow-sm flex justify-between">
